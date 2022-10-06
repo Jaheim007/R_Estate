@@ -1,0 +1,135 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+
+{% block 'content' %}
+
+{% comment %} {% if user.is_authenticated%}
+<main class="login-bg">
+<br><br><br><br><br><br><br>
+<div class="container emp-profile">
+    <form method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    {% if user.image %}
+                        <img src="{{user.image.url}}" alt=""/>
+                    {% else %}
+                        <img src="https://cdn.iconscout.com/icon/free/png-256/user-avatar-contact-portfolio-personal-portrait-profile-6-5623.png" alt=""/>
+                    {% endif %}
+
+                    
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="profile-head">
+                            <h5>
+                                {{user.get_full_name}}
+                            </h5>
+                         <br><br>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-dark btn-lg btn-block" type="submit"><a href="#"
+                    style="color: #fff;">Edit Profile</a></button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div style = "position:relative; left:415px; bottom:100px;" class="row">
+                                    <div class="col-md-4">
+                                        <label>Username</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{user.username}}</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Name</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{user.get_full_name}}</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Email</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{user.email}}</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Phone</label>
+                                    </div>
+                                    {% if user.phone_number %}
+                                    <div class="col-md-6">
+                                        <p>{{user.phone_number}}</p>
+                                    </div>
+                                    {% else %}
+                                    <div class="col-md-6">
+                                        <p>N/A</p>
+                                    </div>
+                                    {% endif %}
+
+
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endif %} {% endcomment %}
+
+<section class="vh-100" style="background-image: url('https://cdn.pixabay.com/photo/2016/09/19/22/46/lake-1681485_1280.jpg'); background-size: cover; background-repeat:no-repeat;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-lg-6 mb-4 mb-lg-0">
+          <div class="card mb-3" style="border-radius: .5rem;">
+            <div class="row g-0">
+              <div class="col-md-4 gradient-custom text-center text-white"
+                style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                <img src="https://img.icons8.com/office/344/test-account.png"
+                  alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
+                <h5>Marie Horwitz</h5>
+                <p>Web Designer</p>
+                <i class="far fa-edit mb-5"></i>
+              </div>
+              <div class="col-md-8">
+                <div class="card-body p-4">
+                  <h6>Account Information</h6>
+                  <hr class="mt-0 mb-4">
+                  <div class="row pt-1">
+                    <div class="col-6 mb-3">
+                      <h6>Email</h6>
+                      <p class="text-muted">info@example.com</p>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <h6>Phone</h6>
+                      <p class="text-muted">123 456 789</p>
+                    </div>
+                  </div>
+                  
+                  </div>
+                  <div class="d-flex justify-content-start">
+                    <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
+                    <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
+                    <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+{% endblock 'content' %}
