@@ -22,5 +22,16 @@ class NewUserForm(UserCreationForm):
             "password2",
         )
         
+class EditUserProfile(ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = (
+            'first_name',
+            'last_name',
+            'username',
+            'phone_number',
+            'image',
+        )
+        
 
         

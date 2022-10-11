@@ -4,6 +4,7 @@ from django.views.generic import View
 from django.contrib.auth import login, authenticate, logout
 from django.core.mail import send_mail
 from django.contrib.auth.forms import SetPasswordForm , PasswordResetForm
+from django.contrib import messages #import messages
 
 from Authentication import forms
 
@@ -24,9 +25,9 @@ class Login(View):
             )
         if user:
             login(request, user)
-            return redirect("/") 
+            return redirect("home") 
         
-        return render(request , "pages/login.html" , locals())
+        return render(request , self.template_name , locals())
     
 class SignUp(View):
     template_name = 'page/signup.html'
@@ -53,6 +54,7 @@ class SignUp(View):
                 password = password1, 
         )
 
+        messages.success(request, "Account successfully created." )
         user.save()
         return redirect("login")
     
@@ -71,6 +73,25 @@ class Profile(View):
     
     def post(self,request):
         pass
+    
+class EditProfile(View):
+    template_name = 'page/edit_profile.html'
+    classe = forms.EditUserProfile
+    
+    def get(self, request):
+        form = self.classe(instance=request.user)
+        return render(request , self.template_name , locals())
+    
+    def post(self , request):
+        form = self.classe(request.POST , request.FILES , instance=request.user)
+        
+        if form.is_valid():
+            messages.success(request, "Account Updated." )
+            form.save()
+            return redirect("profile")
+        return redirect("edit")
+    
+
     
 
 

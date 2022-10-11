@@ -17,13 +17,14 @@
       href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <link rel="stylesheet" href="{% static 'homespace/fonts/icomoon/style.css' %} " />
     <link rel="stylesheet" href="{% static 'homespace/fonts/flaticon/font/flaticon.css' %} " />
 
     <link rel="stylesheet" href="{% static 'homespace/css/tiny-slider.css' %} " />
     <link rel="stylesheet" href="{% static 'homespace/css/aos.css' %} " />
-    <link rel="stylesheet" href="{% static 'homespace/css/style.css' %} " />
+    <link rel="stylesheet" href="{% static 'homespace/css/style.css' %} "/>
     <link rel="stylesheet" href="{% static 'homespace/css/style_login.css' %} " />
     <link rel="stylesheet" href="{% static 'homespace/css/style_profile.css' %} " />
 
@@ -63,7 +64,7 @@
               <li class="has-children">
                 <a href="#">{{user.get_full_name}}</a>
                 <ul class="dropdown">
-                  <li><a href="#">My Account</a></li>
+                  <li><a href="{% url 'profile' %}">My Account</a></li>
                   <li><a href="{% url 'logout' %}">Logout</a></li>
 
 
@@ -74,26 +75,12 @@
             <ul
             class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end"
           >
-            <li class="active"><a href="{% url 'home' %}">Home</a></li>
-            <li class="has-children">
-              <a href="{% url 'property' %}">Properties</a>
-              <ul class="dropdown">
-                <li><a href="#">Buy Property</a></li>
-                <li><a href="#">Sell Property</a></li>
-                <li class="has-children">
-                  <a href="#">Dropdown</a>
-                  <ul class="dropdown">
-                    <li><a href="#">Sub Menu One</a></li>
-                    <li><a href="#">Sub Menu Two</a></li>
-                    <li><a href="#">Sub Menu Three</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li><a href="{% url 'service' %}">Services</a></li>
-            <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'contact' %}">Contact Us</a></li>
-            <li><a href="{% url 'login' %}">Sign In</a></li>
+            {% if request.path == "/" %}<li class="active">{% else %}<li>{% endif %}<a href="{% url 'home' %}">Home</a></li>
+            {% if request.path == "/property/" %}<li class="active">{% else %}<li>{% endif %}<a href="{% url 'property' %}">Properties</a></li>
+            {% if request.path == "/service/" %}<li class="active">{% else %}<li>{% endif %}<a href="{% url 'service' %}">Services</a></li>
+            {% if request.path == "/about/" %}<li class="active">{% else %}<li>{% endif %}<a href="{% url 'about' %}">About</a></li>
+            {% if request.path == "/contact/" %}<li class="active">{% else %}<li>{% endif %}<a href="{% url 'contact' %}">Contact Us</a></li>
+            {% if request.path == "/login/" %}<li class="active">{% else %}<li>{% endif %}<a href="{% url 'login' %}">Sign In</a></li>
 
           </ul>
 

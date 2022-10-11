@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from ckeditor.fields import RichTextField
 
 from Authentication.models import RepeatFields 
 
@@ -61,7 +62,8 @@ class Properties(InactiveProperties):
     garage = models.ForeignKey(Garages, on_delete=models.SET_NULL , null=True , related_name="properties_garages")
     address_name = models.CharField(max_length=254)
     property_type = models.ForeignKey(TypeProperty , on_delete=models.SET_NULL , null=True , related_name = "type_property")
-    description = models.TextField()
+    description = RichTextField(blank=True , null=True)
+    # description = models.TextField()
     main_image = models.ImageField(upload_to='Property_images')
     users = models.ForeignKey(get_user_model() , on_delete=models.SET_NULL , null=True , related_name='property_user_id')
     
