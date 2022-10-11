@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from ckeditor.fields import RichTextField
 
+
 from Authentication.models import RepeatFields 
 
 class InactiveProperties(models.Model):
@@ -9,17 +10,6 @@ class InactiveProperties(models.Model):
     updated = models.DateTimeField(auto_now=True)
     inactive = models.BooleanField(default=False)
     
-
-class AdditionalPropertyImage(RepeatFields):
-    image1 = models.ImageField(upload_to="Additional_Images")
-    image2 = models.ImageField(upload_to="Additional_Images")
-    image3 = models.ImageField(upload_to="Additional_Images")
-    image4 = models.ImageField(upload_to="Additional_Images")
-    image5 = models.ImageField(upload_to="Additional_Images")
-    
-    def __str__(self):
-        return self.image1
-
 
 class Bedrooms(RepeatFields):
     number = models.CharField(max_length=150)
@@ -57,15 +47,18 @@ class Properties(InactiveProperties):
     name = models.CharField(max_length=150)
     price = models.CharField(max_length=150)
     status  = models.CharField(choices=TYPE , max_length=150)
-    bedroom = models.ForeignKey(Bedrooms, on_delete=models.SET_NULL , null=True , related_name="properties_bedrooms")
-    bathroom = models.ForeignKey(Bathrooms, on_delete=models.SET_NULL , null=True , related_name="properties_bathrooms")
-    garage = models.ForeignKey(Garages, on_delete=models.SET_NULL , null=True , related_name="properties_garages")
+    bedroom = models.ForeignKey(Bedrooms, on_delete=models.SET_NULL ,blank=True , null=True , related_name="properties_bedrooms")
+    bathroom = models.ForeignKey(Bathrooms, on_delete=models.SET_NULL ,blank=True , null=True , related_name="properties_bathrooms")
+    garage = models.ForeignKey(Garages, on_delete=models.SET_NULL ,blank=True ,  null=True , related_name="properties_garages")
     address_name = models.CharField(max_length=254)
-    property_type = models.ForeignKey(TypeProperty , on_delete=models.SET_NULL , null=True , related_name = "type_property")
+    property_type = models.ForeignKey(TypeProperty , on_delete=models.SET_NULL ,blank=True ,  null=True , related_name = "type_property")
     description = RichTextField(blank=True , null=True)
-    # description = models.TextField()
     main_image = models.ImageField(upload_to='Property_images')
+    additional_image1 = models.ImageField(upload_to="Additional_Images" , blank=True)
+    additional_image2 = models.ImageField(upload_to="Additional_Images" , blank=True)
+    additional_image3 = models.ImageField(upload_to="Additional_Images" , blank=True)
     users = models.ForeignKey(get_user_model() , on_delete=models.SET_NULL , null=True , related_name='property_user_id')
+
     
     def __str__(self):
         return self.name

@@ -13,7 +13,7 @@ class Login(View):
     classe = forms.LoginUserForm
     
     def get(self , request):
-        form = self.classe
+        form = self.classe()
         return render(request , self.template_name , locals())
     
     def post(self , request):
@@ -34,7 +34,7 @@ class SignUp(View):
     classe = forms.NewUserForm
     
     def get(self,request):
-        form = self.classe
+        form = self.classe()
         return render(request,self.template_name,locals())
     
     def post(self,request):

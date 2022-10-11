@@ -47,7 +47,7 @@
       <div class="container">
         <div class="menu-bg-wrap">
           <div class="site-navigation">
-            <a href="index.html" class="logo m-0 float-start">HomeSpace</a>
+            <a href="{% url 'home' %}" class="logo m-0 float-start">HomeSpace</a>
     {% if user.is_authenticated %}
             <ul
               class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end"
@@ -56,8 +56,8 @@
               <li class="has-children">
                 <a href="{% url 'property' %}">Properties</a>
                 <ul class="dropdown">
-                  <li><a href="#">Add Property</a></li>
-                  <li><a href="#">View Properties</a></li>
+                  <li><a href="{% url 'add_property' %}">Add Property</a></li>
+                  <li><a href="{% url 'view_property' %}">View Properties</a></li>
                 </ul>
               </li>
 

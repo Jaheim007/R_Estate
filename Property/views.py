@@ -10,6 +10,7 @@ class Property(View):
     template_name = 'page/properties.html'
     
     def get(self , request):
+        properties = models.Properties.objects.all()
         return render(request , self.template_name , locals())
     
     def post(self , request):
@@ -18,7 +19,8 @@ class Property(View):
 class Single(View):
     template_name = 'page/property-single.html'
     
-    def get(self , request):
+    def get(self , request , details):
+        property = models.Properties.objects.get(id=details)
         return render(request , self.template_name , locals())
     
     def post(self , request):
@@ -26,55 +28,46 @@ class Single(View):
     
 class AddProperty(View):
     template_name = 'page/add_property.html'
-    add_form = forms.AddProperty
+    add_form = forms.AddPropertyForm
     
     def get(self , request):
-        form = self.add_form
+        form = self.add_form()   
         return render(request , self.template_name , locals())
     
     def post(self , request):
-        msg =''
-        success = True
+        form = self.add_form(request.POST , request.FILES )
         
-        name = request.POST.get("name")
-        price = request.POST.get("price")
-        status = request.POST.get('status')
-        address_name = request.POST.get('address_name')
-        property_type = request.POST.get('property_type')
-        description = request.POST.get('description')
-        bedroom = request.POST.get("bedroom")
-        bathroom = request.POST.get("bathroom")
-        garage = request.POST.get("garage")
-        main_image = request.POST.get("main_image")
-        users = request.user
-        
-        instance_bedroom = models.Bedrooms.objects.get(pk=bedroom)
-        instance_bathroom = models.Bathrooms.objects.get(pk=bathroom)
-        instance_garage = models.Garages.objects.get(pk=garage)
-        instance_type_property = models.TypeProperty.objects.get(pk=property_type)
+        if form.is_valid():
+    
+            show=form.save(commit=False)
             
-         
-        property = models.Properties(
-            name = name, 
-            price = price,
-            status = status,
-            address_name = address_name,
-            property_type = instance_type_property,
-            description = description , 
-            bedroom = instance_bedroom, 
-            bathroom = instance_bathroom, 
-            garage = instance_garage, 
-            main_image = main_image,
-            users = users
-        )
+            show.users = request.user
+            
+            show.save()
+            messages.success(request, "Property Updated.")
+            return redirect("view_property")
+        return redirect("add_property")
+    
+class ViewProperty(View):
+    template_name = 'page/view_property.html'
+    
+    def get(self , request):
+        properties = models.Properties.objects.all()
+        return render(request , self.template_name , locals())
+    
+    def post(self , request):
+        pass
+    
         
-        property.save()
         
-        msg = 'Your email has been saved, we will keep you updated on our latest info.'
         
-        data = {
-        'msg': msg,
-        'success': success
-        }
         
-        return redirect("myproperty")
+        
+        
+        
+        
+        
+        
+        
+        
+

@@ -8,13 +8,13 @@
 
     <div
       class="hero page-inner overlay"
-      style="background-image: url('{% static 'homespace/images/hero_bg_3.jpg' %} ')"
+      style="background-image: url('{{property.main_image.url}} ')"
     >
       <div class="container">
         <div class="row justify-content-center align-items-center">
           <div class="col-lg-9 text-center mt-5">
             <h1 class="heading" data-aos="fade-up">
-              5232 California AVE. 21BC
+              {{property.name}}
             </h1>
 
             <nav
@@ -25,13 +25,13 @@
               <ol class="breadcrumb text-center justify-content-center">
                 <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                 <li class="breadcrumb-item">
-                  <a href="properties.html">Properties</a>
+                  <a href="{% url 'property' %}">Properties</a>
                 </li>
                 <li
                   class="breadcrumb-item active text-white-50"
                   aria-current="page"
                 >
-                  5232 California AVE. 21BC
+                  {{property.address_name }}
                 </li>
               </ol>
             </nav>
@@ -46,15 +46,30 @@
           <div class="col-lg-7">
             <div class="img-property-slide-wrap">
               <div class="img-property-slide">
-                <img src="{% static 'homespace/images/img_1.jpg' %}" alt="Image" class="img-fluid" />
-                <img src="{% static 'homespace/images/img_2.jpg' %} " alt="Image" class="img-fluid" />
-                <img src="{% static 'homespace/images/img_3.jpg' %} " alt="Image" class="img-fluid" />
+                {% if property.additional_image1 %}
+                <img src="{{property.additional_image1.url}}" alt="Image" class="img-fluid" />
+                {% else %}
+                <img src="https://cdn.pixabay.com/photo/2022/10/08/09/19/winter-7506621__480.jpg" alt="Image" class="img-fluid" />                
+                {% endif %}
+                {% if property.additional_image2 %}
+                <img src="{{property.additional_image2.url}}" alt="Image" class="img-fluid" />
+                {% else %}
+                <img src="https://cdn.pixabay.com/photo/2022/10/08/09/19/winter-7506621__480.jpg" alt="Image" class="img-fluid" />                
+                {% endif %}
+                {% if property.additional_image3 %}
+                <img src="{{property.additional_image3.url}}" alt="Image" class="img-fluid" />
+                {% else %}
+                <img src="https://cdn.pixabay.com/photo/2022/10/08/09/19/winter-7506621__480.jpg" alt="Image" class="img-fluid" />                
+                {% endif %}
+{% comment %}                 
+                <img src="{{property.additional_image2.url}}" alt="Image" class="img-fluid" />
+                <img src="{{property.additional_image3.url}}" alt="Image" class="img-fluid" /> {% endcomment %}
               </div>
             </div>
           </div>
           <div class="col-lg-4">
-            <h2 class="heading text-primary">5232 California Ave. 21BC</h2>
-            <p class="meta">California, United States</p>
+            <h2 class="heading text-primary">{{property.name }}</h2>
+            <p class="meta">{{property.address_name }}</p>
             <p class="text-black-50">
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione
               laborum quo quos omnis sed magnam id, ducimus saepe, debitis error
@@ -68,20 +83,17 @@
             </p>
 
             <div class="d-block agent-box p-5">
-              <div class="img mb-4">
+              <div class="img mb-5">
                 <img
-                  src="{% static 'homespace/images/person_2-min.jpg' %} "
+                  src="{{property.users.image.url}} "
                   alt="Image"
                   class="img-fluid"
                 />
               </div>
               <div class="text">
-                <h3 class="mb-0">Alicia Huston</h3>
-                <div class="meta mb-3">Real Estate</div>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Ratione laborum quo quos omnis sed magnam id ducimus saepe
-                </p>
+                <h3 class="mb-0">{{property.users.get_full_name}}</h3>
+                <h3 class="mb-0">{{property.users.phone_number}}</h3>
+                  <br><br>
                 <ul class="list-unstyled social dark-hover d-flex">
                   <li class="me-1">
                     <a href="#"><span class="icon-instagram"></span></a>
