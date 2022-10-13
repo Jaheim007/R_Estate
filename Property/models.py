@@ -34,6 +34,12 @@ class TypeProperty(RepeatFields):
     
     def __str__(self):
         return self.property_type
+    
+class Cities(RepeatFields):
+    city = models.CharField(max_length=150)
+    
+    def __str__(self):
+        return self.city
 
 class Properties(InactiveProperties):
     FOR_SALE = "FOR SALE"
@@ -51,6 +57,7 @@ class Properties(InactiveProperties):
     bathroom = models.ForeignKey(Bathrooms, on_delete=models.SET_NULL ,blank=True , null=True , related_name="properties_bathrooms")
     garage = models.ForeignKey(Garages, on_delete=models.SET_NULL ,blank=True ,  null=True , related_name="properties_garages")
     address_name = models.CharField(max_length=254)
+    location = models.ForeignKey(Cities , on_delete=models.SET_NULL, null=True, related_name='location_cities')
     property_type = models.ForeignKey(TypeProperty , on_delete=models.SET_NULL ,blank=True ,  null=True , related_name = "type_property")
     description = RichTextField(blank=True , null=True)
     main_image = models.ImageField(upload_to='Property_images')
@@ -63,9 +70,17 @@ class Properties(InactiveProperties):
     def __str__(self):
         return self.name
 
+
+class RequestTime(RepeatFields):
+    name = models.CharField(max_length=150)
+    email = models.EmailField()
+    subject = models.CharField(max_length=150)
+    message = models.TextField()
+    save_user = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, null=True ,  related_name='user_request')
+
     
-    
-    
+    def __str__(self):
+        return self.name
     
     
     

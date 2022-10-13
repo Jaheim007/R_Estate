@@ -1,0 +1,68 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+
+{% block 'content' %}
+
+    <div
+      class="hero page-inner overlay"
+      style="background-image: url('{% static 'homespace/images/hero_bg_1.jpg' %} ')">
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-lg-9 text-center mt-5">
+            <h1 class="heading" data-aos="fade-up">Searched property</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% include 'page/message.html' %}
+    <div class="section section-properties">
+      <div class="container">
+        <div class="row">
+        {% if query %}
+        {% for c in results %}
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+            <div class="property-item mb-30">
+              <a href="{% url 'single_property' c.id %}" class="img">
+                <img src="{{c.main_image.url}}" alt="Image" class="img-fluid" />
+              </a>
+
+              <div class="property-content">
+                <div class="price mb-2"><span>{{c.price}}</span></div>
+                <div>
+                  <span class="d-block mb-2 text-black-50"
+                    >{{c.address_name}}</span
+                  >
+                  <span class="city d-block mb-3">{{c.name}}</span>
+
+                  <div class="specs d-flex mb-4">
+                    <span class="d-block d-flex align-items-center me-3">
+                      <span class="icon-bed me-2"></span>
+                      <span class="caption">{{c.bedroom}} beds</span>
+                    </span>
+                    <span class="d-block d-flex align-items-center">
+                      <span class="icon-bath me-2"></span>
+                      <span class="caption">{{c.bathroom}} baths</span>
+                    </span>
+                    <span class="d-block d-flex align-items-center">
+                        <span><i class="cid-garage"></i></span>
+                      <span class="caption">{{c.garage}} garage</span>
+                    </span>
+                  </div>
+
+                  <a
+                    href="{% url 'single_property' c.id %}"
+                    class="btn btn-primary py-2 px-3">See details</a>
+                </div>
+              </div>
+            </div>
+            <!-- .item -->
+          </div>
+          {% endfor %}
+        {% endif %}
+        </div>
+      </div>
+    </div>
+
+
+    {% endblock 'content' %}

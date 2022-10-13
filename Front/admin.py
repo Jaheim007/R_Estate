@@ -11,12 +11,5 @@ class Contact(admin.ModelAdmin):
         "message"
     )
 
-@admin.register(models.Newsletters)
-class Newsletter(admin.ModelAdmin):
-    list_display = (
-        "email",
-    )
-    
-
 
 # Register your models here.

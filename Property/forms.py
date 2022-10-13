@@ -15,6 +15,7 @@ class AddPropertyForm(ModelForm):
             'bathroom',
             'garage',
             'address_name',
+            'location',
             'main_image',
             'description',
             'additional_image1',

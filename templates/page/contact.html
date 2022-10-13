@@ -76,13 +76,17 @@
             </div>
           </div>
           <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
-            <form action="#">
+            <form method="post" id="contactForm">
+              {% csrf_token %}
               <div class="row">
                 <div class="col-6 mb-3">
                   <input
                     type="text"
                     class="form-control"
                     placeholder="Your Name"
+                    v-model="name"
+                    id="name"
+                    name="name"
                   />
                 </div>
                 <div class="col-6 mb-3">
@@ -90,6 +94,9 @@
                     type="email"
                     class="form-control"
                     placeholder="Your Email"
+                    v-model="email"                  
+                    id="email"
+                    name="email"
                   />
                 </div>
                 <div class="col-12 mb-3">
@@ -97,25 +104,25 @@
                     type="text"
                     class="form-control"
                     placeholder="Subject"
+                    v-model="subject"
+                    id="subject"
+                    name="subject"
                   />
                 </div>
                 <div class="col-12 mb-3">
                   <textarea
-                    name=""
-                    id=""
+                    name="message"
+                    id="message"
                     cols="30"
                     rows="7"
                     class="form-control"
                     placeholder="Message"
+                    v-model="message"
                   ></textarea>
                 </div>
 
                 <div class="col-12">
-                  <input
-                    type="submit"
-                    value="Send Message"
-                    class="btn btn-primary"
-                  />
+                  <button type="sumbit" @click.prevent="post_data" class="btn btn-primary">Send Message</button>
                 </div>
               </div>
             </form>

@@ -2,9 +2,12 @@ from django.shortcuts import render , redirect
 from django.views.generic import View
 from django.core.mail import send_mail
 from django.contrib import messages #import messages
+from django.db.models import Q 
+from django.http import JsonResponse
 
 from Property import forms
 from Property import models
+
 
 class Property(View):
     template_name = 'page/properties.html'
@@ -19,13 +22,40 @@ class Property(View):
 class Single(View):
     template_name = 'page/property-single.html'
     
-    def get(self , request , details):
+    def get(self , request ,details):
         property = models.Properties.objects.get(id=details)
+        c = models.Properties.objects.get(id=details)
         return render(request , self.template_name , locals())
     
-    def post(self , request):
-        pass
-    
+    def post(self , request , details):
+        msg =''
+        success = True
+        if request.method == "POST":
+            name = request.POST.get('name')
+            email = request.POST.get('email')
+            subject = request.POST.get('subject')
+            message = request.POST.get('message')
+            save_user = request.POST.get('save_user')
+            
+            instance_save_user= models.Properties.objects.get(users=save_user)  
+            request_time = models.RequestTime(
+                name = name , 
+                email = email, 
+                subject = subject, 
+                message=message,
+                save_user = instance_save_user
+                
+            )
+        request_time.save()
+        msg = 'Thank you for contacting Medicio.'
+            
+        data = {
+            'msg': msg,
+            'success': success
+        }
+
+        return JsonResponse(data, safe=False)
+
 class AddProperty(View):
     template_name = 'page/add_property.html'
     add_form = forms.AddPropertyForm
@@ -58,6 +88,32 @@ class ViewProperty(View):
     def post(self , request):
         pass
     
+class SearchProperty(View):
+    template_name = 'page/search.html'
+    
+    def get(self , request):
+        results = []
+        
+        if request.method == "GET":
+        
+            query = request.GET.get('search')
+
+            if query == '':
+
+                query = 'None'
+                messages.error(request, "No Properties in that location.")
+                
+                print(query)
+
+            results = models.Properties.objects.filter(Q(location__city=query))
+            print(query)
+        return render(request , self.template_name , locals())
+    
+    def post(self , request):
+        pass
+    
+    
+
         
         
         
