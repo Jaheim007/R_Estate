@@ -39,8 +39,8 @@ class Single(View):
             message = request.POST.get('message')
             save_user = usered.users
             
-            mail = auth.User.objects.get(username= save_user)
-            rat = mail.email
+            mail = auth.User.objects.get(username=save_user)
+            mail_email = mail.email
             print(save_user)
             
             request_time = models.RequestTime(
@@ -57,7 +57,7 @@ class Single(View):
                 "Konato Account",
                 "Your seller's account was created with success. ",
                 'jaheimkouaho@gmail.com',
-                [rat],
+                [mail_email],
                 fail_silently=False
         )
         
@@ -124,6 +124,23 @@ class SearchProperty(View):
     
     def post(self , request):
         pass
+    
+class EditProperty(View):
+    template_name = 'page/edit_property.html'
+    classe = forms.EditPropertyForm
+    
+    def get(self, request):
+        form = self.classe(instance=request.Properties)
+        return render(request , self.template_name , locals())
+    
+    def post(self , request):
+        form = self.classe(request.POST , request.FILES , instance=request.Properties)
+        
+        if form.is_valid():
+            messages.success(request, "Property Updated." )
+            form.save()
+            return redirect("view_property")
+        return redirect("edit_property")
     
     
 

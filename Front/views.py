@@ -57,15 +57,7 @@ class Contact(View):
         }
 
         return JsonResponse(data, safe=False)
-    
-class Service(View):
-    template_name = 'page/services.html'
-    
-    def get(self , request):
-        return render(request , self.template_name , locals())
-    
-    def post(self, request):
-        pass
+
     
 
 

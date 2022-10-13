@@ -44,7 +44,6 @@ class Properties(admin.ModelAdmin):
         'garage',
         'description',
         'property_type',
-        'address_name',
         'location',
         'main_image',
         'users' 

@@ -54,21 +54,21 @@
                   </a>
 
                   <div class="property-content">
-                    <div class="price mb-2"><span>$1,291,000</span></div>
+                    <div class="price mb-2"><span>{{property.name}}</span></div>
                     <div>
                       <span class="d-block mb-2 text-black-50"
-                        >5232 California Fake, Ave. 21BC</span
+                        >{{property.location}}</span
                       >
-                      <span class="city d-block mb-3">California, USA</span>
+                      <span class="city d-block mb-3">CFA {{property.price}}</span>
 
                       <div class="specs d-flex mb-4">
                         <span class="d-block d-flex align-items-center me-3">
                           <span class="icon-bed me-2"></span>
-                          <span class="caption">2 beds</span>
+                          <span class="caption">{{property.bedroom}} beds</span>
                         </span>
                         <span class="d-block d-flex align-items-center">
                           <span class="icon-bath me-2"></span>
-                          <span class="caption">2 baths</span>
+                          <span class="caption">{{property.bathroom}} baths</span>
                         </span>
                       </div>
 
@@ -124,21 +124,21 @@
               </a>
 
               <div class="property-content">
-                <div class="price mb-2"><span>{{property.price}}</span></div>
+                <div class="price mb-2"><span>{{property.name}}</span></div>
                 <div>
                   <span class="d-block mb-2 text-black-50"
-                    >{{property.address_name}}</span
+                    >{{property.location}}</span
                   >
-                  <span class="city d-block mb-3">{{property.name}}</span>
+                  <span class="city d-block mb-3">CFA {{property.price}}</span>
 
                   <div class="specs d-flex mb-4">
                     <span class="d-block d-flex align-items-center me-3">
                       <span class="icon-bed me-2"></span>
-                      <span class="caption">{{property.bedrooms}} beds</span>
+                      <span class="caption">{{property.bedroom}} beds</span>
                     </span>
                     <span class="d-block d-flex align-items-center">
                       <span class="icon-bath me-2"></span>
-                      <span class="caption">{{property.bathrooms}} baths</span>
+                      <span class="caption">{{property.bathroom}} baths</span>
                     </span>
                   </div>
 

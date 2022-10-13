@@ -31,7 +31,7 @@
                   class="breadcrumb-item active text-white-50"
                   aria-current="page"
                 >
-                  {{property.address_name }}
+                  {{property.location }}
                 </li>
               </ol>
             </nav>
@@ -71,16 +71,21 @@
             <h2 class="heading text-primary">{{property.name }}</h2>
             <p class="meta">{{property.address_name }}</p>
             <p class="text-black-50">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione
-              laborum quo quos omnis sed magnam id, ducimus saepe, debitis error
-              earum, iste dicta odio est sint dolorem magni animi tenetur.
+              {{property.description|safe }}
             </p>
-            <p class="text-black-50">
-              Perferendis eligendi reprehenderit, assumenda molestias nisi eius
-              iste reiciendis porro tenetur in, repudiandae amet libero.
-              Doloremque, reprehenderit cupiditate error laudantium qui, esse
-              quam debitis, eum cumque perferendis, illum harum expedita.
-            </p>
+            <h2>
+              City: {{property.location}}
+            </h2>
+            <h2>
+              Bedrooms: {{property.bedroom}}
+            </h2>
+            <h2>
+              Bathrooms: {{property.bathroom}}
+            </h2>
+            <h2>
+              Garage: {{property.garage}}
+            </h2>
+
 
             <div class="d-block agent-box p-5">
               <div class="img mb-5">

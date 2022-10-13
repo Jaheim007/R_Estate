@@ -56,7 +56,6 @@ class Properties(InactiveProperties):
     bedroom = models.ForeignKey(Bedrooms, on_delete=models.SET_NULL ,blank=True , null=True , related_name="properties_bedrooms")
     bathroom = models.ForeignKey(Bathrooms, on_delete=models.SET_NULL ,blank=True , null=True , related_name="properties_bathrooms")
     garage = models.ForeignKey(Garages, on_delete=models.SET_NULL ,blank=True ,  null=True , related_name="properties_garages")
-    address_name = models.CharField(max_length=254)
     location = models.ForeignKey(Cities , on_delete=models.SET_NULL, null=True, related_name='location_cities')
     property_type = models.ForeignKey(TypeProperty , on_delete=models.SET_NULL ,blank=True ,  null=True , related_name = "type_property")
     description = RichTextField(blank=True , null=True)

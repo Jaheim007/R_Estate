@@ -1,0 +1,100 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block 'content' %}
+   
+<section style="background-image: url('https://cdn.pixabay.com/photo/2016/09/23/14/52/florida-home-1689859_1280.jpg') ; background-size: cover;" id="cover" class="min-vh-100">
+    <div id="cover-caption">
+        <div  class="container">
+            <br><br><br><br><br><br><br>
+            <div  class="row text-white">
+                <div style="background-color: #fff;" class="col-xl-10 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
+                    <h3 class="display-6 py-2 text-truncate"><u>Edit your property</u></h3>
+                    <h3 class="display-8 py-2 text-truncate"><u>Property Information</u></h3>
+                    <div class="px-2">
+                      <br>
+                        {{form.media}}
+                        <form method='POST' enctype="multipart/form-data">
+                          {% csrf_token %}
+                            <div class="form-group">
+                                <label style="color: black;">Property Title</label>
+                                {% render_field form.name  class="mt-4 form-control" %}
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                              <label  style="color: black;" class="sr-only">City</label>
+                              {% render_field form.location  class="mt-4 form-control"  %}
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <label  style="color: black;" class="sr-only">Status</label>
+                                {% render_field form.status  class="mt-4 form-control"  %}
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                              <label  style="color: black;" class="sr-only">Property Type</label>
+                              {% render_field form.property_type  class="mt-4 form-control"  %}
+                            </div> 
+                            <br>
+
+                            <div class="form-group">
+                              <label  style="color: black;" class="sr-only">Price</label>
+                              {% render_field form.price  class="mt-4 form-control" placeholder='CFA / XOF' %}
+                            </div> 
+                            <br>
+
+                            <div class="form-group">
+                              <label  style="color: black;" class="sr-only">Number of rooms</label>
+                              {% render_field form.bedroom  class="mt-4 form-control" %}
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                              <label  style="color: black;" class="sr-only">Number of bathrooms</label>
+                              {% render_field form.bathroom  class="mt-4 form-control"  %}
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                              <label  style="color: black;" class="sr-only">Number of garage</label>
+                              {% render_field form.garage  class="mt-4 form-control" %}
+                            </div>
+            
+                            <br>
+
+                            <div class="form-group">
+                              <label style="color: black;" class="sr-only">Property Image</label>
+                              {% render_field form.main_image  class="mt-4 form-control"  %}
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                              <label style="color: black;" class="sr-only">Interior and Exterior images(Oligation)</label>
+                              {% render_field form.additional_image1  class="mt-4 form-control"  %}
+                              {% render_field form.additional_image2  class="mt-4 form-control"  %}
+                              {% render_field form.additional_image3  class="mt-4 form-control"  %}
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                              <label  style="color: black;" class="sr-only">Descrption</label>
+                              <br>
+                              {% render_field form.description  class="mt-4 form-control" %}
+                            </div>
+            
+                            <br>
+                            <button type="submit" class="btn btn-primary btn-lg">Sumbit property</button>
+                        </form>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>  
