@@ -179,7 +179,7 @@
       })
     </script>
 
-    <script>
+    {% comment %} <script>
       var app2 = new Vue({
           el: "#requestForm",
           data: {
@@ -187,7 +187,7 @@
               email:'', 
               subject : '',
               message: '',
-              url:"{% url 'single_property' property.id %}"
+              url: "{% url 'single_property' property.id %}"
           },
           methods:{
               post_data(){
@@ -239,7 +239,7 @@
           },
           delimiters: ['%{', '}']
       })
-    </script>
+    </script> {% endcomment %}
 
   </body>
 </html>

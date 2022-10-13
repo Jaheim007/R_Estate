@@ -156,7 +156,7 @@
             </div>
           </div>
           <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
-            <form method="post" id="requestForm">
+            <form action="{% url 'single_property' property.id %}" method="POST" id="requestForm">
               {% csrf_token %}
               <div class="row">
                 <div class="col-6 mb-3">

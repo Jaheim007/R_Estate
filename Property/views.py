@@ -7,6 +7,7 @@ from django.http import JsonResponse
 
 from Property import forms
 from Property import models
+from Authentication import models as auth
 
 
 class Property(View):
@@ -27,7 +28,8 @@ class Single(View):
         c = models.Properties.objects.get(id=details)
         return render(request , self.template_name , locals())
     
-    def post(self , request , details):
+    def post(self , request, details):
+        usered = models.Properties.objects.get(id=details)
         msg =''
         success = True
         if request.method == "POST":
@@ -35,18 +37,30 @@ class Single(View):
             email = request.POST.get('email')
             subject = request.POST.get('subject')
             message = request.POST.get('message')
-            save_user = request.POST.get('save_user')
+            save_user = usered.users
             
-            instance_save_user= models.Properties.objects.get(users=save_user)  
+            mail = auth.User.objects.get(username= save_user)
+            rat = mail.email
+            print(save_user)
+            
             request_time = models.RequestTime(
                 name = name , 
                 email = email, 
                 subject = subject, 
-                message=message,
-                save_user = instance_save_user
-                
+                message = message,
+                save_user = save_user
             )
+            
+            
         request_time.save()
+        send_mail(
+                "Konato Account",
+                "Your seller's account was created with success. ",
+                'jaheimkouaho@gmail.com',
+                [rat],
+                fail_silently=False
+        )
+        
         msg = 'Thank you for contacting Medicio.'
             
         data = {
@@ -54,7 +68,7 @@ class Single(View):
             'success': success
         }
 
-        return JsonResponse(data, safe=False)
+        return redirect('single_property', usered.id)
 
 class AddProperty(View):
     template_name = 'page/add_property.html'
@@ -106,7 +120,6 @@ class SearchProperty(View):
                 print(query)
 
             results = models.Properties.objects.filter(Q(location__city=query))
-            print(query)
         return render(request , self.template_name , locals())
     
     def post(self , request):
