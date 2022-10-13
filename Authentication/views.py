@@ -56,6 +56,13 @@ class SignUp(View):
 
         messages.success(request, "Account successfully created." )
         user.save()
+        
+        send_mail(
+                "Your Account was created successfully",
+                'jaheimkouaho@gmail.com',
+                [email],
+                fail_silently=False
+        )
         return redirect("login")
     
 class Logout(View):

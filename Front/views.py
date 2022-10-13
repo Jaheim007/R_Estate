@@ -2,6 +2,7 @@ from django.shortcuts import render ,redirect
 from django.views.generic import View
 from django.contrib import messages #import messages
 from django.http import JsonResponse
+from django.core.mail import send_mail
 from django.db.models import Q
 
 from Property import models
@@ -49,7 +50,14 @@ class Contact(View):
                 message=message
             )
         contact.save()
-        msg = 'Thank you for contacting Medicio.'
+        send_mail(
+                "Your Message",
+                "Thanks for HomeSpace we will reach out to you in a few days",
+                'jaheimkouaho@gmail.com',
+                [email],
+                fail_silently=False
+        )
+        msg = 'Thank you for contacting HomeSpace.'
             
         data = {
             'msg': msg,
@@ -57,7 +65,15 @@ class Contact(View):
         }
 
         return JsonResponse(data, safe=False)
-
+    
+class Service(View):
+    template_name = 'page/services.html'
+    
+    def get(self , request):
+        return render(request , self.template_name , locals())
+    
+    def post(self, request):
+        pass
     
 
 

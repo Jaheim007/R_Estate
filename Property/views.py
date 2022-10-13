@@ -54,14 +54,14 @@ class Single(View):
             
         request_time.save()
         send_mail(
-                "Konato Account",
-                "Your seller's account was created with success. ",
+                "Account",
+                "Was Created Successfully",
                 'jaheimkouaho@gmail.com',
                 [mail_email],
                 fail_silently=False
         )
         
-        msg = 'Thank you for contacting Medicio.'
+        msg = 'Thank you for contacting HomeSpace.'
             
         data = {
             'msg': msg,
