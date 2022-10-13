@@ -58,6 +58,7 @@ class SignUp(View):
         user.save()
         
         send_mail(
+                'Your Account',
                 "Your Account was created successfully",
                 'jaheimkouaho@gmail.com',
                 [email],
