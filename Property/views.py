@@ -15,6 +15,7 @@ class Property(View):
     
     def get(self , request):
         properties = models.Properties.objects.all()
+        print(properties)
         return render(request , self.template_name , locals())
     
     def post(self , request):
@@ -23,7 +24,7 @@ class Property(View):
 class Single(View):
     template_name = 'page/property-single.html'
     
-    def get(self , request ,details):
+    def get(self , request , details):
         property = models.Properties.objects.get(id=details)
         c = models.Properties.objects.get(id=details)
         return render(request , self.template_name , locals())
